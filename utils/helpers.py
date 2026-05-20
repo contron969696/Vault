@@ -13,18 +13,21 @@ CURRENCY = "💰"
 _registry: dict[str, list[tuple[str, str]]] = defaultdict(list)
 
 CATEGORY_EMOJIS = {
-    "Economy":  "💰",
-    "Earning":  "⚒️",
-    "Skills":   "🎒",
-    "Social":   "👥",
-    "Shop":     "🛒",
-    "Casino":   "🎰",
-    "Admin":    "🔧",
+    "Economy": "💰",
+    "Earning": "⚒️",
+    "Skills":  "🎒",
+    "Social":  "👥",
+    "Shop":    "🛒",
+    "Casino":  "🎰",
+    "Admin":   "🔧",
 }
 
 def register_command(category: str, description: str):
     def decorator(func):
-        name = func.callback.__name__ if hasattr(func, "callback") else func.__name__
+        try:
+            name = func.callback.__name__ if hasattr(func, "callback") else func.__name__
+        except Exception:
+            name = getattr(func, "__name__", "unknown")
         _registry[category].append((name, description))
         return func
     return decorator
@@ -48,7 +51,6 @@ def fmt_currency(amount: int) -> str:
     return f"{CURRENCY} {amount:,}"
 
 def prestige_multiplier(prestige: int) -> float:
-    """Each prestige level adds 5% to all earnings."""
     return 1.0 + (prestige * 0.05)
 
 def apply_prestige(amount: int, prestige: int) -> int:

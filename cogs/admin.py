@@ -5,7 +5,7 @@ from discord import app_commands
 from utils.database import db
 from utils.helpers import success_embed, error_embed, fmt_currency, register_command
 
-OWNER_ID = 123456789012345678  # <-- replace with your Discord user ID
+OWNER_ID = 453735929668960279  # <-- replace with your Discord user ID
 
 def is_owner():
     async def predicate(interaction: discord.Interaction) -> bool:

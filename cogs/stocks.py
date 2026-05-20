@@ -1,16 +1,14 @@
 import discord
 from discord.ext import commands, tasks
 from discord import app_commands
-from datetime import datetime
 import asyncio
-
 from utils.database import db
 from utils.helpers import (
     economy_embed, error_embed, success_embed, info_embed,
     fmt_currency, register_command
 )
+from utils.levels import grant_xp
 
-# ── Stock definitions ──────────────────────────────────────────────────────────
 STOCKS = {
     "AAPL":  "Apricot Inc.",
     "MSFT":  "Microsoar Corp.",
@@ -25,37 +23,51 @@ STOCKS = {
 }
 
 
-def price_arrow(price: float, prev: float) -> str:
-    if prev <= 0 or price == prev:
-        return "➡️"
+def price_arrow(price, prev):
+    if prev <= 0 or price == prev: return "➡️"
     return "📈" if price > prev else "📉"
 
-def pct_change(price: float, prev: float) -> str:
-    if prev <= 0:
-        return ""
-    pct = ((price - prev) / prev) * 100
+def pct_change(price, prev):
+    if prev <= 0: return ""
+    pct  = ((price - prev) / prev) * 100
     sign = "+" if pct >= 0 else ""
     return f" ({sign}{pct:.2f}%)"
 
-def fmt_price(price: float) -> str:
+def fmt_price(price):
     return f"💵 {price:,.2f}"
 
 
 async def fetch_prices_async():
-    """Fetch current prices for all stocks using yfinance. Run in executor to avoid blocking."""
     import yfinance as yf
     prices = {}
     for ticker in STOCKS:
         try:
-            t = yf.Ticker(ticker)
-            info = t.fast_info
+            t              = yf.Ticker(ticker)
+            info           = t.fast_info
             prices[ticker] = round(float(info["lastPrice"]), 2)
         except Exception:
             pass
     return prices
 
 
+async def maybe_levelup(interaction, leveled_up, new_level):
+    if not leveled_up:
+        return
+    from utils.levels import get_title, TITLES
+    title     = get_title(new_level)
+    title_str = f'\nYou earned the title **"{title}"**! 🏆' if new_level in TITLES else ""
+    await interaction.followup.send(
+        embed=discord.Embed(
+            title=f"⬆️ Level Up! You're now Level {new_level}!",
+            description=f"Keep going to unlock more content.{title_str}",
+            color=0xF1C40F
+        ),
+        ephemeral=False
+    )
+
+
 class Stocks(commands.Cog):
+
     def __init__(self, bot):
         self.bot = bot
         self.price_update_loop.start()
@@ -63,7 +75,6 @@ class Stocks(commands.Cog):
     def cog_unload(self):
         self.price_update_loop.cancel()
 
-    # ── Background price update every hour ────────────────────────────────────
     @tasks.loop(hours=1)
     async def price_update_loop(self):
         await self._update_prices()
@@ -71,11 +82,11 @@ class Stocks(commands.Cog):
     @price_update_loop.before_loop
     async def before_price_loop(self):
         await self.bot.wait_until_ready()
-        await self._update_prices()  # fetch on startup too
+        await self._update_prices()
 
     async def _update_prices(self):
         try:
-            loop = asyncio.get_event_loop()
+            loop   = asyncio.get_event_loop()
             prices = await loop.run_in_executor(None, lambda: asyncio.run(fetch_prices_async()))
             for ticker, price in prices.items():
                 await db.update_stock_price(ticker, price)
@@ -83,7 +94,6 @@ class Stocks(commands.Cog):
             import logging
             logging.getLogger("vault").error(f"Stock price update failed: {e}")
 
-    # ── /stocks ────────────────────────────────────────────────────────────────
     @app_commands.command(name="stocks", description="View all available stocks and current prices.")
     @register_command("Economy", "Browse all 10 stocks with live prices and % change.")
     async def stocks(self, interaction: discord.Interaction):
@@ -92,20 +102,15 @@ class Stocks(commands.Cog):
         if not rows or all(r["price"] == 0 for r in rows):
             return await interaction.followup.send(
                 embed=error_embed("Prices Unavailable", "Stock prices are still loading. Try again in a moment."),
-                ephemeral=True
+                ephemeral=False
             )
-
         lines = []
         for r in rows:
             arrow  = price_arrow(r["price"], r["prev_price"])
             change = pct_change(r["price"], r["prev_price"])
-            lines.append(
-                f"{arrow} **{r['fake_name']}** (`{r['ticker']}`)\n"
-                f"    {fmt_price(r['price'])}{change}"
-            )
-
+            lines.append(f"{arrow} **{r['fake_name']}** (`{r['ticker']}`)\n  {fmt_price(r['price'])}{change}")
         updated = rows[0]["last_updated"] or "never"
-        embed = info_embed(
+        embed   = info_embed(
             "📈 Vault Stock Exchange",
             "\n\n".join(lines) +
             f"\n\n*Prices update hourly · Last updated: {updated} UTC*\n"
@@ -113,7 +118,6 @@ class Stocks(commands.Cog):
         )
         await interaction.followup.send(embed=embed)
 
-    # ── /buy-stock ─────────────────────────────────────────────────────────────
     @app_commands.command(name="buy-stock", description="Buy shares of a stock.")
     @app_commands.describe(ticker="Stock ticker (e.g. AAPL)", shares="Number of whole shares to buy")
     @register_command("Economy", "Buy shares of a stock using coins from your wallet.")
@@ -121,45 +125,45 @@ class Stocks(commands.Cog):
         ticker = ticker.upper()
         if ticker not in STOCKS:
             return await interaction.response.send_message(
-                embed=error_embed("Unknown Stock", f"`{ticker}` is not a valid ticker. Use `/stocks` to see all options."),
-                ephemeral=True
+                embed=error_embed("Unknown Stock", f"`{ticker}` is not valid. Use `/stocks` to browse."),
+                ephemeral=False
             )
         if shares <= 0:
             return await interaction.response.send_message(
-                embed=error_embed("Invalid", "Shares must be at least 1."), ephemeral=True
+                embed=error_embed("Invalid", "Shares must be at least 1."), ephemeral=False
             )
-
         stock = await db.get_stock(ticker)
         if not stock or stock["price"] == 0:
             return await interaction.response.send_message(
                 embed=error_embed("Price Unavailable", "This stock's price hasn't loaded yet. Try again shortly."),
-                ephemeral=True
+                ephemeral=False
             )
-
+        user       = await db.get_user(interaction.user.id)
         total_cost = int(shares * stock["price"])
-        user = await db.get_user(interaction.user.id)
         if user["balance"] < total_cost:
             short = total_cost - user["balance"]
-            msg   = f"**{STOCKS[ticker]}** — {shares} share{'s' if shares > 1 else ''} costs {fmt_currency(total_cost)}.\nYou need {fmt_currency(short)} more in your wallet."
+            msg   = f"**{STOCKS[ticker]}** — {shares} share{'s' if shares > 1 else ''} costs {fmt_currency(total_cost)}.\nYou need {fmt_currency(short)} more."
             if user["bank"] >= short:
                 msg += "\n\nYou have enough in your bank — use `/withdraw` first."
-            return await interaction.response.send_message(embed=error_embed("Insufficient Funds", msg), ephemeral=True)
-
+            return await interaction.response.send_message(
+                embed=error_embed("Insufficient Funds", msg), ephemeral=False
+            )
         success = await db.buy_stock(interaction.user.id, ticker, shares, stock["price"])
         if not success:
             return await interaction.response.send_message(
-                embed=error_embed("Purchase Failed", "Something went wrong. Try again."), ephemeral=True
+                embed=error_embed("Purchase Failed", "Something went wrong. Try again."), ephemeral=False
             )
-
-        embed = success_embed(
+        xp = 10
+        leveled_up, _, new_level = await grant_xp(interaction.user.id, xp)
+        await interaction.response.send_message(embed=success_embed(
             "Stock Purchased!",
             f"Bought **{shares}x {STOCKS[ticker]}** (`{ticker}`)\n"
             f"Price per share: {fmt_price(stock['price'])}\n"
-            f"Total cost: {fmt_currency(total_cost)}"
-        )
-        await interaction.response.send_message(embed=embed)
+            f"Total cost: {fmt_currency(total_cost)}\n"
+            f"+{xp} XP"
+        ))
+        await maybe_levelup(interaction, leveled_up, new_level)
 
-    # ── /sell-stock ────────────────────────────────────────────────────────────
     @app_commands.command(name="sell-stock", description="Sell shares of a stock.")
     @app_commands.describe(ticker="Stock ticker (e.g. AAPL)", shares="Number of shares to sell")
     @register_command("Economy", "Sell shares and receive coins directly to your wallet.")
@@ -168,38 +172,43 @@ class Stocks(commands.Cog):
         if ticker not in STOCKS:
             return await interaction.response.send_message(
                 embed=error_embed("Unknown Stock", f"`{ticker}` is not valid. Use `/stocks` to browse."),
-                ephemeral=True
+                ephemeral=False
             )
         if shares <= 0:
             return await interaction.response.send_message(
-                embed=error_embed("Invalid", "Shares must be at least 1."), ephemeral=True
+                embed=error_embed("Invalid", "Shares must be at least 1."), ephemeral=False
             )
-
         stock = await db.get_stock(ticker)
         if not stock or stock["price"] == 0:
             return await interaction.response.send_message(
-                embed=error_embed("Price Unavailable", "Price hasn't loaded yet."), ephemeral=True
+                embed=error_embed("Price Unavailable", "Price hasn't loaded yet."), ephemeral=False
             )
+        portfolio = await db.get_portfolio(interaction.user.id)
+        holding   = next((h for h in portfolio if h["ticker"] == ticker), None)
+        avg_cost  = holding["avg_cost"] if holding else stock["price"]
 
         success, proceeds = await db.sell_stock(interaction.user.id, ticker, shares, stock["price"])
         if not success:
             return await interaction.response.send_message(
-                embed=error_embed("Can't Sell", f"You don't have {shares} shares of `{ticker}`.\nCheck `/portfolio` to see what you own."),
-                ephemeral=True
+                embed=error_embed("Can't Sell", f"You don't have {shares} shares of `{ticker}`.\nCheck `/portfolio`."),
+                ephemeral=False
             )
-
-        # Find avg cost to show profit/loss
-        portfolio = await db.get_portfolio(interaction.user.id)
-        # Use last known avg_cost from before sell — approximate from proceeds
-        embed = success_embed(
+        profit     = proceeds - int(shares * avg_cost)
+        sold_profit= profit > 0
+        xp         = 30 if sold_profit else 10
+        leveled_up, _, new_level = await grant_xp(interaction.user.id, xp)
+        pl_str  = f"+{fmt_currency(profit)}" if profit >= 0 else fmt_currency(profit)
+        pl_emoji= "📈" if profit >= 0 else "📉"
+        await interaction.response.send_message(embed=success_embed(
             "Stock Sold!",
             f"Sold **{shares}x {STOCKS[ticker]}** (`{ticker}`)\n"
             f"Price per share: {fmt_price(stock['price'])}\n"
-            f"Proceeds: {fmt_currency(proceeds)} → added to wallet"
-        )
-        await interaction.response.send_message(embed=embed)
+            f"Proceeds: {fmt_currency(proceeds)} → added to wallet\n"
+            f"P/L: {pl_emoji} {pl_str}\n"
+            f"+{xp} XP{'  *(profit bonus!)*' if sold_profit else ''}"
+        ))
+        await maybe_levelup(interaction, leveled_up, new_level)
 
-    # ── /portfolio ─────────────────────────────────────────────────────────────
     @app_commands.command(name="portfolio", description="View your stock holdings.")
     @register_command("Economy", "View all your stock holdings with current value and profit/loss.")
     async def portfolio(self, interaction: discord.Interaction):
@@ -207,10 +216,9 @@ class Stocks(commands.Cog):
         if not holdings:
             return await interaction.response.send_message(
                 embed=info_embed("📊 Your Portfolio", "You don't own any stocks yet.\nUse `/stocks` to browse and `/buy-stock` to invest."),
-                ephemeral=True
+                ephemeral=False
             )
-
-        lines = []
+        lines          = []
         total_value    = 0
         total_invested = 0
         for h in holdings:
@@ -226,7 +234,6 @@ class Stocks(commands.Cog):
                 f"  {h['shares']} shares · {fmt_price(h['current_price'])}/share\n"
                 f"  Value: {fmt_currency(current_val)} · P/L: {pl_emoji} {pl_str}"
             )
-
         total_pl     = total_value - total_invested
         total_pl_str = f"+{fmt_currency(total_pl)}" if total_pl >= 0 else fmt_currency(total_pl)
         lines.append(
@@ -234,9 +241,9 @@ class Stocks(commands.Cog):
             f"**Total Value:** {fmt_currency(total_value)}\n"
             f"**Total P/L:** {'📈' if total_pl >= 0 else '📉'} {total_pl_str}"
         )
-
-        embed = info_embed("📊 Your Portfolio", "\n\n".join(lines))
-        await interaction.response.send_message(embed=embed, ephemeral=True)
+        await interaction.response.send_message(
+            embed=info_embed("📊 Your Portfolio", "\n\n".join(lines)), ephemeral=False
+        )
 
 
 async def setup(bot):

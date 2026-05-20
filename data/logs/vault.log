@@ -184,3 +184,199 @@
 2026-05-15 03:56:17,388 | INFO     | vault | Loaded cog: cogs.help
 2026-05-15 03:56:17,703 | INFO     | vault | Slash commands synced.
 2026-05-15 03:56:19,991 | INFO     | vault | Vault is online as Vault#8876 (ID: 1504657211513897000)
+2026-05-19 06:33:41,515 | INFO     | vault | Loaded cog: cogs.economy
+2026-05-19 06:33:41,520 | INFO     | vault | Loaded cog: cogs.admin
+2026-05-19 06:33:41,523 | INFO     | vault | Loaded cog: cogs.shop
+2026-05-19 06:33:41,530 | INFO     | vault | Loaded cog: cogs.casino
+2026-05-19 06:33:41,536 | INFO     | vault | Loaded cog: cogs.stocks
+2026-05-19 06:33:41,539 | INFO     | vault | Loaded cog: cogs.help
+2026-05-19 06:33:41,672 | INFO     | vault | Slash commands synced.
+2026-05-19 06:33:44,263 | INFO     | vault | Vault is online as Vault#8876 (ID: 1504657211513897000)
+2026-05-19 06:34:31,599 | INFO     | vault | Loaded cog: cogs.economy
+2026-05-19 06:34:31,600 | INFO     | vault | Loaded cog: cogs.admin
+2026-05-19 06:34:31,602 | INFO     | vault | Loaded cog: cogs.shop
+2026-05-19 06:34:31,608 | INFO     | vault | Loaded cog: cogs.casino
+2026-05-19 06:34:31,610 | INFO     | vault | Loaded cog: cogs.stocks
+2026-05-19 06:34:31,611 | INFO     | vault | Loaded cog: cogs.help
+2026-05-19 06:34:31,766 | INFO     | vault | Slash commands synced.
+2026-05-19 06:34:34,587 | INFO     | vault | Vault is online as Vault#8876 (ID: 1504657211513897000)
+2026-05-19 06:41:51,018 | INFO     | vault | Loaded cog: cogs.economy
+2026-05-19 06:41:51,020 | INFO     | vault | Loaded cog: cogs.admin
+2026-05-19 06:41:51,021 | INFO     | vault | Loaded cog: cogs.shop
+2026-05-19 06:41:51,027 | INFO     | vault | Loaded cog: cogs.casino
+2026-05-19 06:41:51,030 | INFO     | vault | Loaded cog: cogs.stocks
+2026-05-19 06:41:51,031 | INFO     | vault | Loaded cog: cogs.help
+2026-05-19 06:41:51,246 | INFO     | vault | Slash commands synced.
+2026-05-19 06:41:53,689 | INFO     | vault | Vault is online as Vault#8876 (ID: 1504657211513897000)
+2026-05-19 06:49:57,354 | INFO     | vault | Loaded cog: cogs.economy
+2026-05-19 06:49:57,355 | INFO     | vault | Loaded cog: cogs.admin
+2026-05-19 06:49:57,356 | INFO     | vault | Loaded cog: cogs.shop
+2026-05-19 06:49:57,362 | INFO     | vault | Loaded cog: cogs.casino
+2026-05-19 06:49:57,364 | INFO     | vault | Loaded cog: cogs.stocks
+2026-05-19 06:49:57,365 | INFO     | vault | Loaded cog: cogs.help
+2026-05-19 06:49:57,644 | INFO     | vault | Slash commands synced.
+2026-05-19 06:50:00,017 | INFO     | vault | Vault is online as Vault#8876 (ID: 1504657211513897000)
+2026-05-19 09:13:12,323 | INFO     | vault | Applying migration v8...
+2026-05-19 09:13:12,335 | INFO     | vault | Migration v8 done.
+2026-05-19 09:13:12,335 | INFO     | vault | Applying migration v9...
+2026-05-19 09:13:12,341 | INFO     | vault | Migration v9 done.
+2026-05-19 09:13:12,368 | ERROR    | vault | Failed to load cog cogs.economy: Extension 'cogs.economy' raised an error: ImportError: cannot import name 'grant_xp' from 'utils.levels' (C:\Users\12017\PycharmProjects\Vault\utils\levels.py)
+2026-05-19 09:13:12,369 | INFO     | vault | Loaded cog: cogs.admin
+2026-05-19 09:13:12,370 | INFO     | vault | Loaded cog: cogs.shop
+2026-05-19 09:13:12,377 | ERROR    | vault | Failed to load cog cogs.casino: Extension 'cogs.casino' raised an error: ImportError: cannot import name 'grant_xp' from 'utils.levels' (C:\Users\12017\PycharmProjects\Vault\utils\levels.py)
+2026-05-19 09:13:12,382 | ERROR    | vault | Failed to load cog cogs.stocks: Extension 'cogs.stocks' raised an error: ImportError: cannot import name 'grant_xp' from 'utils.levels' (C:\Users\12017\PycharmProjects\Vault\utils\levels.py)
+2026-05-19 09:13:12,386 | ERROR    | vault | Failed to load cog cogs.properties: Extension 'cogs.properties' raised an error: ImportError: cannot import name 'grant_xp' from 'utils.levels' (C:\Users\12017\PycharmProjects\Vault\utils\levels.py)
+2026-05-19 09:13:12,387 | INFO     | vault | Loaded cog: cogs.help
+2026-05-19 09:13:12,512 | INFO     | vault | Slash commands synced.
+2026-05-19 09:13:14,801 | INFO     | vault | Vault is online as Vault#8876 (ID: 1504657211513897000)
+2026-05-19 09:13:20,350 | ERROR    | vault | Failed to load cog cogs.economy: Extension 'cogs.economy' raised an error: ImportError: cannot import name 'grant_xp' from 'utils.levels' (C:\Users\12017\PycharmProjects\Vault\utils\levels.py)
+2026-05-19 09:13:20,351 | INFO     | vault | Loaded cog: cogs.admin
+2026-05-19 09:13:20,353 | INFO     | vault | Loaded cog: cogs.shop
+2026-05-19 09:13:20,354 | ERROR    | vault | Failed to load cog cogs.casino: Extension 'cogs.casino' raised an error: ImportError: cannot import name 'grant_xp' from 'utils.levels' (C:\Users\12017\PycharmProjects\Vault\utils\levels.py)
+2026-05-19 09:13:20,355 | ERROR    | vault | Failed to load cog cogs.stocks: Extension 'cogs.stocks' raised an error: ImportError: cannot import name 'grant_xp' from 'utils.levels' (C:\Users\12017\PycharmProjects\Vault\utils\levels.py)
+2026-05-19 09:13:20,356 | ERROR    | vault | Failed to load cog cogs.properties: Extension 'cogs.properties' raised an error: ImportError: cannot import name 'grant_xp' from 'utils.levels' (C:\Users\12017\PycharmProjects\Vault\utils\levels.py)
+2026-05-19 09:13:20,357 | INFO     | vault | Loaded cog: cogs.help
+2026-05-19 09:14:18,933 | INFO     | vault | Loaded cog: cogs.economy
+2026-05-19 09:14:18,934 | INFO     | vault | Loaded cog: cogs.admin
+2026-05-19 09:14:18,936 | INFO     | vault | Loaded cog: cogs.shop
+2026-05-19 09:14:18,937 | INFO     | vault | Loaded cog: cogs.casino
+2026-05-19 09:14:18,939 | INFO     | vault | Loaded cog: cogs.stocks
+2026-05-19 09:14:18,940 | INFO     | vault | Loaded cog: cogs.properties
+2026-05-19 09:14:18,941 | INFO     | vault | Loaded cog: cogs.help
+2026-05-19 09:14:19,259 | INFO     | vault | Slash commands synced.
+2026-05-19 09:14:21,562 | INFO     | vault | Vault is online as Vault#8876 (ID: 1504657211513897000)
+2026-05-19 09:16:46,120 | INFO     | vault | Loaded cog: cogs.economy
+2026-05-19 09:16:46,122 | INFO     | vault | Loaded cog: cogs.admin
+2026-05-19 09:16:46,124 | INFO     | vault | Loaded cog: cogs.shop
+2026-05-19 09:16:46,125 | INFO     | vault | Loaded cog: cogs.casino
+2026-05-19 09:16:46,127 | INFO     | vault | Loaded cog: cogs.stocks
+2026-05-19 09:16:46,129 | INFO     | vault | Loaded cog: cogs.properties
+2026-05-19 09:16:46,130 | INFO     | vault | Loaded cog: cogs.help
+2026-05-19 09:16:46,414 | INFO     | vault | Slash commands synced.
+2026-05-19 09:16:48,691 | INFO     | vault | Vault is online as Vault#8876 (ID: 1504657211513897000)
+2026-05-19 19:27:45,002 | INFO     | vault | Loaded cog: cogs.economy
+2026-05-19 19:27:45,006 | INFO     | vault | Loaded cog: cogs.admin
+2026-05-19 19:27:45,009 | INFO     | vault | Loaded cog: cogs.shop
+2026-05-19 19:27:45,017 | INFO     | vault | Loaded cog: cogs.casino
+2026-05-19 19:27:45,027 | INFO     | vault | Loaded cog: cogs.stocks
+2026-05-19 19:27:45,034 | INFO     | vault | Loaded cog: cogs.properties
+2026-05-19 19:27:45,038 | INFO     | vault | Loaded cog: cogs.help
+2026-05-19 19:27:45,367 | INFO     | vault | Slash commands synced.
+2026-05-19 19:27:47,631 | INFO     | vault | Vault is online as Vault#8876 (ID: 1504657211513897000)
+2026-05-19 19:35:36,076 | INFO     | vault | Loaded cog: cogs.economy
+2026-05-19 19:35:36,077 | INFO     | vault | Loaded cog: cogs.admin
+2026-05-19 19:35:36,079 | INFO     | vault | Loaded cog: cogs.shop
+2026-05-19 19:35:36,081 | INFO     | vault | Loaded cog: cogs.casino
+2026-05-19 19:35:36,084 | INFO     | vault | Loaded cog: cogs.stocks
+2026-05-19 19:35:36,086 | INFO     | vault | Loaded cog: cogs.properties
+2026-05-19 19:35:36,088 | INFO     | vault | Loaded cog: cogs.help
+2026-05-19 19:35:36,227 | INFO     | vault | Slash commands synced.
+2026-05-19 19:35:38,600 | INFO     | vault | Vault is online as Vault#8876 (ID: 1504657211513897000)
+2026-05-19 19:36:59,583 | INFO     | vault | Loaded cog: cogs.economy
+2026-05-19 19:36:59,584 | INFO     | vault | Loaded cog: cogs.admin
+2026-05-19 19:36:59,585 | INFO     | vault | Loaded cog: cogs.shop
+2026-05-19 19:36:59,587 | INFO     | vault | Loaded cog: cogs.casino
+2026-05-19 19:36:59,589 | INFO     | vault | Loaded cog: cogs.stocks
+2026-05-19 19:36:59,590 | INFO     | vault | Loaded cog: cogs.properties
+2026-05-19 19:36:59,593 | INFO     | vault | Loaded cog: cogs.help
+2026-05-19 19:36:59,759 | INFO     | vault | Slash commands synced.
+2026-05-19 19:37:02,372 | INFO     | vault | Vault is online as Vault#8876 (ID: 1504657211513897000)
+2026-05-19 19:38:06,827 | INFO     | vault | Loaded cog: cogs.economy
+2026-05-19 19:38:06,829 | INFO     | vault | Loaded cog: cogs.admin
+2026-05-19 19:38:06,830 | INFO     | vault | Loaded cog: cogs.shop
+2026-05-19 19:38:06,831 | INFO     | vault | Loaded cog: cogs.casino
+2026-05-19 19:38:06,834 | INFO     | vault | Loaded cog: cogs.stocks
+2026-05-19 19:38:06,836 | INFO     | vault | Loaded cog: cogs.properties
+2026-05-19 19:38:06,838 | INFO     | vault | Loaded cog: cogs.help
+2026-05-19 19:38:07,025 | INFO     | vault | Slash commands synced.
+2026-05-19 19:38:10,102 | INFO     | vault | Vault is online as Vault#8876 (ID: 1504657211513897000)
+2026-05-19 19:48:09,397 | INFO     | vault | Loaded cog: cogs.economy
+2026-05-19 19:48:09,400 | INFO     | vault | Loaded cog: cogs.admin
+2026-05-19 19:48:09,403 | INFO     | vault | Loaded cog: cogs.shop
+2026-05-19 19:48:09,405 | INFO     | vault | Loaded cog: cogs.casino
+2026-05-19 19:48:09,409 | INFO     | vault | Loaded cog: cogs.stocks
+2026-05-19 19:48:09,411 | INFO     | vault | Loaded cog: cogs.properties
+2026-05-19 19:48:09,413 | INFO     | vault | Loaded cog: cogs.help
+2026-05-19 19:48:09,628 | INFO     | vault | Slash commands synced.
+2026-05-19 19:48:12,016 | INFO     | vault | Vault is online as Vault#8876 (ID: 1504657211513897000)
+2026-05-19 19:50:47,950 | INFO     | vault | Loaded cog: cogs.economy
+2026-05-19 19:50:47,952 | INFO     | vault | Loaded cog: cogs.admin
+2026-05-19 19:50:47,954 | INFO     | vault | Loaded cog: cogs.shop
+2026-05-19 19:50:47,956 | INFO     | vault | Loaded cog: cogs.casino
+2026-05-19 19:50:47,958 | INFO     | vault | Loaded cog: cogs.stocks
+2026-05-19 19:50:47,960 | INFO     | vault | Loaded cog: cogs.properties
+2026-05-19 19:50:47,961 | INFO     | vault | Loaded cog: cogs.help
+2026-05-19 19:50:48,131 | INFO     | vault | Slash commands synced.
+2026-05-19 19:50:50,645 | INFO     | vault | Vault is online as Vault#8876 (ID: 1504657211513897000)
+2026-05-19 21:38:29,503 | INFO     | vault | Loaded cog: cogs.economy
+2026-05-19 21:38:29,505 | INFO     | vault | Loaded cog: cogs.admin
+2026-05-19 21:38:29,506 | INFO     | vault | Loaded cog: cogs.shop
+2026-05-19 21:38:29,509 | INFO     | vault | Loaded cog: cogs.casino
+2026-05-19 21:38:29,513 | INFO     | vault | Loaded cog: cogs.stocks
+2026-05-19 21:38:29,514 | INFO     | vault | Loaded cog: cogs.properties
+2026-05-19 21:38:29,516 | INFO     | vault | Loaded cog: cogs.help
+2026-05-19 21:38:29,732 | INFO     | vault | Slash commands synced.
+2026-05-19 21:38:32,028 | INFO     | vault | Vault is online as Vault#8876 (ID: 1504657211513897000)
+2026-05-19 21:57:41,794 | INFO     | vault | Loaded cog: cogs.economy
+2026-05-19 21:57:41,795 | INFO     | vault | Loaded cog: cogs.admin
+2026-05-19 21:57:41,796 | INFO     | vault | Loaded cog: cogs.shop
+2026-05-19 21:57:41,803 | INFO     | vault | Loaded cog: cogs.casino
+2026-05-19 21:57:41,808 | INFO     | vault | Loaded cog: cogs.stocks
+2026-05-19 21:57:41,812 | INFO     | vault | Loaded cog: cogs.properties
+2026-05-19 21:57:41,813 | INFO     | vault | Loaded cog: cogs.help
+2026-05-19 21:57:41,998 | INFO     | vault | Slash commands synced.
+2026-05-19 21:57:44,656 | INFO     | vault | Vault is online as Vault#8876 (ID: 1504657211513897000)
+2026-05-19 22:04:23,456 | INFO     | vault | Loaded cog: cogs.economy
+2026-05-19 22:04:23,458 | INFO     | vault | Loaded cog: cogs.admin
+2026-05-19 22:04:23,459 | INFO     | vault | Loaded cog: cogs.shop
+2026-05-19 22:04:23,465 | INFO     | vault | Loaded cog: cogs.casino
+2026-05-19 22:04:23,468 | INFO     | vault | Loaded cog: cogs.stocks
+2026-05-19 22:04:23,470 | INFO     | vault | Loaded cog: cogs.properties
+2026-05-19 22:04:23,471 | INFO     | vault | Loaded cog: cogs.help
+2026-05-19 22:04:23,732 | INFO     | vault | Slash commands synced.
+2026-05-19 22:04:27,152 | INFO     | vault | Vault is online as Vault#8876 (ID: 1504657211513897000)
+2026-05-20 01:08:12,232 | INFO     | vault | Loaded cog: cogs.economy
+2026-05-20 01:08:12,233 | INFO     | vault | Loaded cog: cogs.admin
+2026-05-20 01:08:12,234 | INFO     | vault | Loaded cog: cogs.shop
+2026-05-20 01:08:12,236 | INFO     | vault | Loaded cog: cogs.casino
+2026-05-20 01:08:12,238 | INFO     | vault | Loaded cog: cogs.stocks
+2026-05-20 01:08:12,239 | INFO     | vault | Loaded cog: cogs.properties
+2026-05-20 01:08:12,240 | INFO     | vault | Loaded cog: cogs.help
+2026-05-20 01:08:12,457 | INFO     | vault | Slash commands synced.
+2026-05-20 01:08:14,990 | INFO     | vault | Vault is online as Vault#8876 (ID: 1504657211513897000)
+2026-05-20 01:12:46,424 | INFO     | vault | Loaded cog: cogs.economy
+2026-05-20 01:12:46,427 | INFO     | vault | Loaded cog: cogs.admin
+2026-05-20 01:12:46,429 | INFO     | vault | Loaded cog: cogs.shop
+2026-05-20 01:12:46,431 | INFO     | vault | Loaded cog: cogs.casino
+2026-05-20 01:12:46,433 | INFO     | vault | Loaded cog: cogs.stocks
+2026-05-20 01:12:46,434 | INFO     | vault | Loaded cog: cogs.properties
+2026-05-20 01:12:46,436 | INFO     | vault | Loaded cog: cogs.help
+2026-05-20 01:12:46,638 | INFO     | vault | Slash commands synced.
+2026-05-20 01:12:49,002 | INFO     | vault | Vault is online as Vault#8876 (ID: 1504657211513897000)
+2026-05-20 01:19:23,845 | INFO     | vault | Loaded cog: cogs.economy
+2026-05-20 01:19:23,846 | INFO     | vault | Loaded cog: cogs.admin
+2026-05-20 01:19:23,847 | INFO     | vault | Loaded cog: cogs.shop
+2026-05-20 01:19:23,848 | INFO     | vault | Loaded cog: cogs.casino
+2026-05-20 01:19:23,851 | INFO     | vault | Loaded cog: cogs.stocks
+2026-05-20 01:19:23,852 | INFO     | vault | Loaded cog: cogs.properties
+2026-05-20 01:19:23,853 | INFO     | vault | Loaded cog: cogs.help
+2026-05-20 01:19:24,002 | INFO     | vault | Slash commands synced.
+2026-05-20 01:19:26,302 | INFO     | vault | Vault is online as Vault#8876 (ID: 1504657211513897000)
+2026-05-20 16:41:10,243 | INFO     | vault | Loaded cog: cogs.economy
+2026-05-20 16:41:10,245 | INFO     | vault | Loaded cog: cogs.admin
+2026-05-20 16:41:10,247 | INFO     | vault | Loaded cog: cogs.shop
+2026-05-20 16:41:10,250 | INFO     | vault | Loaded cog: cogs.casino
+2026-05-20 16:41:10,256 | INFO     | vault | Loaded cog: cogs.stocks
+2026-05-20 16:41:10,259 | INFO     | vault | Loaded cog: cogs.properties
+2026-05-20 16:41:10,261 | INFO     | vault | Loaded cog: cogs.help
+2026-05-20 16:41:10,457 | INFO     | vault | Slash commands synced.
+2026-05-20 16:41:13,141 | INFO     | vault | Vault is online as Vault#8876 (ID: 1504657211513897000)
+2026-05-20 19:20:19,522 | INFO     | vault | Loaded cog: cogs.economy
+2026-05-20 19:20:19,528 | INFO     | vault | Loaded cog: cogs.admin
+2026-05-20 19:20:19,536 | INFO     | vault | Loaded cog: cogs.shop
+2026-05-20 19:20:19,550 | INFO     | vault | Loaded cog: cogs.casino
+2026-05-20 19:20:19,570 | INFO     | vault | Loaded cog: cogs.stocks
+2026-05-20 19:20:19,578 | INFO     | vault | Loaded cog: cogs.properties
+2026-05-20 19:20:19,584 | INFO     | vault | Loaded cog: cogs.help
+2026-05-20 19:20:19,764 | INFO     | vault | Slash commands synced.
+2026-05-20 19:20:22,031 | INFO     | vault | Vault is online as Vault#8876 (ID: 1504657211513897000)
